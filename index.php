@@ -56,6 +56,7 @@ proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 	<th>nama</th>
 	<th>email</th>
 	<th>jurusan</th>
+	<th>File</th>
 </tr>
 <?php $i=1; ?>
 
@@ -74,6 +75,7 @@ proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 <th> <?= $row["email"]; ?></th>
 <th><?= $row["jurusan"] ?></th>
 
+<th> <a href="download.php?file=<?php echo $row['filename'] ?>">Download</a><br></th>
 </tr>
 <?php $i++ ?>
 <?php endforeach; ?>

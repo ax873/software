@@ -55,8 +55,23 @@ else{
 		<label for="gambar">gambar </label>
 <br>
 		<img src="gambar/<?= $mhs['gaambar']; ?>" width="40">
+		
 <br>
 		<input type="file" name="gambar" id="gambar" value="<?= $mhs["gambar"] ?>"></li>
+<br>
+
+<label for="filename">file </label>
+<br>
+	
+		<input type="text" name="filename" id="filename" value="<?= $mhs["filename"] ?>"></li>
+<br>
+<br>
+		<input type="file" name="filename" id="filename" value="<?= $mhs["filename"] ?>"></li>
+<br>
+
+
+
+
 
 <button type="submit" name="submit" >Ubah DATA</button>
 

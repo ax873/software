@@ -28,6 +28,11 @@ $nrp=htmlspecialchars($data["nrp"]);
 $nama=htmlspecialchars($data["nama"]);
 $email=htmlspecialchars($data["email"]);
 $jurusan=htmlspecialchars($data["jurusan"]);
+$filename=filen();
+if (!$filename){
+	return false;
+}
+
 
 $gambar=upload();
 if (!$gambar){
@@ -35,11 +40,56 @@ if (!$gambar){
 }
 
 $insert="insert into mahasiswa values
-('','$nama','$nrp','$email','$jurusan','$gambar')
+('','$nama','$nrp','$email','$jurusan','$gambar','$filename')
 ";
 mysqli_query($conn,$insert);
 
 return mysqli_affected_rows($conn);
+
+}
+
+function filen(){
+
+	$namaFile =$_FILES['filename']['name'];
+	$ukuranFile=$_FILES['filename']['size'];
+	$error=$_FILES['filename']['error'];
+	$tmpName=$_FILES['filename']['tmp_name'];
+	
+	if($error===4){
+	
+		echo "<script>
+	alert('pilih gambar terlebih dahulu ')
+	</script>
+		";
+		return false;
+	}
+	
+	$ekstensigambarvalid=['doc','docx','pdf'];
+	$ektensigambar =explode('.',$namaFile);
+	$ektensigambar=strtolower(end($ektensigambar));
+	if (!in_array($ektensigambar, $ekstensigambarvalid)){
+	
+		echo "<script>
+	alert('yang di upload bukan gambar  ')
+	</script>
+		";
+		return false;
+	}
+	if ($ukuranFile>1000000000){
+		echo "<script>
+	alert('size  di upload besar gambar  ')
+	</script>
+		";
+		return false;
+	}
+	
+	$namafilebaru=uniqid();
+	$namafilebaru .='.';
+	$namafilebaru .=$ektensigambar;
+	
+	move_uploaded_file($tmpName, 'gambar/'.$namafilebaru);
+	return $namafilebaru;
+	
 
 }
 
@@ -59,7 +109,7 @@ alert('pilih gambar terlebih dahulu ')
 	return false;
 }
 
-$ekstensigambarvalid=['jpg','jpeg','png'];
+$ekstensigambarvalid=['jpg','jpeg','png','doc','docx','pdf'];
 $ektensigambar =explode('.',$namaFile);
 $ektensigambar=strtolower(end($ektensigambar));
 if (!in_array($ektensigambar, $ekstensigambarvalid)){
@@ -70,7 +120,7 @@ alert('yang di upload bukan gambar  ')
 	";
 	return false;
 }
-if ($ukuranFile>1000000){
+if ($ukuranFile>1000000000){
 	echo "<script>
 alert('size  di upload besar gambar  ')
 </script>

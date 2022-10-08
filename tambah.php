@@ -45,6 +45,10 @@ else{
 		<label for="gambar">gambar </label>
 		<input type="file" name="gambar" id="gambar"></li>
 
+		<label for="filename">filename </label>
+		<input type="file" name="filename" id="filename"></li>
+		
+
 <button type="submit" name="submit" >TAMBAH DATA</button>
 
 </ul>
